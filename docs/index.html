@@ -26,6 +26,15 @@
       gap: 4px;
     }
 
+    label.disabled {
+      opacity: 0.45;
+    }
+
+    label.disabled input,
+    label.disabled select {
+      cursor: not-allowed;
+    }
+
     input, select, button {
       font: inherit;
       padding: 6px;
@@ -51,7 +60,7 @@
   <h1>DataMaBobber (Patent Pending)</h1>
 
   <div class="controls">
-    <label>
+    <label id="graphTypeControl">
       Graph type
       <select id="graphType">
         <option value="scatter">Scatter</option>
@@ -62,7 +71,7 @@
       </select>
     </label>
 
-    <label>
+    <label id="xFieldControl">
       X axis
       <select id="xField">
         <option value="word_count">Word count</option>
@@ -73,7 +82,7 @@
       </select>
     </label>
 
-    <label>
+    <label id="yFieldControl">
       Y axis
       <select id="yField">
         <option value="rating_after_days">Rating after N days</option>
@@ -83,37 +92,37 @@
       </select>
     </label>
 
-    <label>
+    <label id="ratingDaysControl">
       Rating window, days
       <input id="ratingDays" type="number" value="14" min="0" step="1">
     </label>
 
-    <label>
+    <label id="createdAfterControl">
       Created after
       <input id="createdAfter" type="date">
     </label>
 
-    <label>
+    <label id="createdBeforeControl">
       Created before
       <input id="createdBefore" type="date">
     </label>
 
-    <label>
+    <label id="requiredTagControl">
       Required tag
       <input id="requiredTag" type="text" placeholder="optional, e.g. 9000">
     </label>
 
-    <label>
+    <label id="maxWordCountControl">
       Max word count
       <input id="maxWordCount" type="number" min="0" step="100" placeholder="optional">
     </label>
 
-    <label>
+    <label id="binWidthControl">
       Histogram bin width
       <input id="binWidth" type="number" value="100" min="1" step="50">
     </label>
 
-    <label>
+    <label id="periodSizeControl">
       Period size
       <select id="periodSize">
         <option value="month">Monthly</option>
@@ -122,12 +131,12 @@
       </select>
     </label>
 
-    <label>
+    <label id="wordThresholdControl">
       Word threshold
       <input id="wordThreshold" type="number" value="2000" min="0" step="100">
     </label>
 
-    <label>
+    <label id="trendlineControl">
       Trendline
       <select id="trendline">
         <option value="yes" selected>Yes</option>
@@ -144,6 +153,9 @@
   <script>
     let dataset = null;
 
+    const RATING_AFTER_DAYS_MIN_DATE = new Date("2022-05-15T00:00:00Z");
+    const RATING_AFTER_DAYS_MIN_DATE_STRING = "2022-05-15";
+
     async function loadDataset() {
       const response = await fetch("data/scp_articles.json");
       if (!response.ok) {
@@ -155,6 +167,7 @@
       document.getElementById("stats").textContent =
         `Loaded ${dataset.articleCount} articles\nGenerated at: ${dataset.generatedAt}`;
 
+      updateControlAvailability();
       renderGraph();
     }
 
@@ -193,17 +206,43 @@
       return article[field];
     }
 
+    function selectedGraphUsesRatingAfterDays() {
+      const graphType = document.getElementById("graphType").value;
+      const xField = document.getElementById("xField").value;
+      const yField = document.getElementById("yField").value;
+
+      if (graphType === "scatter") {
+        return xField === "rating_after_days" || yField === "rating_after_days";
+      }
+
+      if (graphType === "histogram") {
+        return xField === "rating_after_days";
+      }
+
+      return false;
+    }
+
     function filteredArticles() {
-      const createdAfter = parseDateOnly(document.getElementById("createdAfter").value);
+      const createdAfterInput = parseDateOnly(document.getElementById("createdAfter").value);
       const createdBefore = parseDateOnly(document.getElementById("createdBefore").value);
       const requiredTag = document.getElementById("requiredTag").value.trim();
       const maxWordCountRaw = document.getElementById("maxWordCount").value;
       const maxWordCount = maxWordCountRaw ? Number(maxWordCountRaw) : null;
 
+      const requiresRatingAfterDaysFloor = selectedGraphUsesRatingAfterDays();
+
+      let effectiveCreatedAfter = createdAfterInput;
+
+      if (requiresRatingAfterDaysFloor) {
+        if (!effectiveCreatedAfter || effectiveCreatedAfter < RATING_AFTER_DAYS_MIN_DATE) {
+          effectiveCreatedAfter = RATING_AFTER_DAYS_MIN_DATE;
+        }
+      }
+
       return dataset.articles.filter(article => {
         const created = articleDate(article);
 
-        if (createdAfter && created <= createdAfter) return false;
+        if (effectiveCreatedAfter && created <= effectiveCreatedAfter) return false;
         if (createdBefore && created >= createdBefore) return false;
 
         if (requiredTag && !(article.tags || []).includes(requiredTag)) return false;
@@ -331,12 +370,25 @@
         yaxis: { title: labelForField(yField) },
       }, { responsive: true });
 
+      if (selectedGraphUsesRatingAfterDays()) {
+        statsText += `\nRating-after-N-days filter applied: created after ${RATING_AFTER_DAYS_MIN_DATE_STRING}`;
+      }
+
       document.getElementById("stats").textContent = statsText;
     }
 
     function renderHistogram(articles) {
+      const xField = document.getElementById("xField").value;
       const binWidth = Number(document.getElementById("binWidth").value || 100);
-      const values = articles.map(article => article.word_count);
+
+      const values = articles
+        .map(article => getFieldValue(article, xField))
+        .filter(value =>
+          value !== null &&
+          value !== undefined &&
+          typeof value === "number" &&
+          Number.isFinite(value)
+        );
 
       Plotly.newPlot("chart", [{
         type: "histogram",
@@ -346,13 +398,18 @@
         },
         name: "Articles"
       }], {
-        title: "Word count distribution",
-        xaxis: { title: "Word count" },
+        title: `${labelForField(xField)} distribution`,
+        xaxis: { title: labelForField(xField) },
         yaxis: { title: "Number of articles" },
       }, { responsive: true });
 
-      document.getElementById("stats").textContent =
-        `Articles histogrammed: ${values.length}`;
+      let statsText = `Articles histogrammed: ${values.length}`;
+
+      if (selectedGraphUsesRatingAfterDays()) {
+        statsText += `\nRating-after-N-days filter applied: created after ${RATING_AFTER_DAYS_MIN_DATE_STRING}`;
+      }
+
+      document.getElementById("stats").textContent = statsText;
     }
 
     function periodKey(date, periodSize) {
@@ -476,8 +533,72 @@
       return labels[field] || field;
     }
 
+    function setControlEnabled(controlId, enabled) {
+      const label = document.getElementById(controlId);
+      if (!label) return;
+
+      label.classList.toggle("disabled", !enabled);
+
+      const inputs = label.querySelectorAll("input, select, button");
+
+      for (const input of inputs) {
+        input.disabled = !enabled;
+      }
+    }
+
+    function updateRatingAfterDaysDateHint() {
+      const createdAfterInput = document.getElementById("createdAfter");
+      const usesRatingAfterDays = selectedGraphUsesRatingAfterDays();
+
+      if (usesRatingAfterDays) {
+        createdAfterInput.min = RATING_AFTER_DAYS_MIN_DATE_STRING;
+
+        if (!createdAfterInput.value || createdAfterInput.value < RATING_AFTER_DAYS_MIN_DATE_STRING) {
+          createdAfterInput.value = RATING_AFTER_DAYS_MIN_DATE_STRING;
+        }
+      } else {
+        createdAfterInput.removeAttribute("min");
+      }
+    }
+
+    function updateControlAvailability() {
+      const graphType = document.getElementById("graphType").value;
+
+      const isScatter = graphType === "scatter";
+      const isHistogram = graphType === "histogram";
+      const isPeriodUnderWordCount = graphType === "period-under-word-count";
+
+      const xField = document.getElementById("xField").value;
+      const yField = document.getElementById("yField").value;
+
+      const usesRatingAfterDays =
+        (isScatter && (xField === "rating_after_days" || yField === "rating_after_days")) ||
+        (isHistogram && xField === "rating_after_days");
+
+      setControlEnabled("xFieldControl", isScatter || isHistogram);
+      setControlEnabled("yFieldControl", isScatter);
+
+      setControlEnabled("ratingDaysControl", usesRatingAfterDays);
+
+      setControlEnabled("createdAfterControl", true);
+      setControlEnabled("createdBeforeControl", true);
+      setControlEnabled("requiredTagControl", true);
+      setControlEnabled("maxWordCountControl", true);
+
+      setControlEnabled("binWidthControl", isHistogram);
+
+      setControlEnabled("periodSizeControl", isPeriodUnderWordCount);
+      setControlEnabled("wordThresholdControl", isPeriodUnderWordCount);
+
+      setControlEnabled("trendlineControl", isScatter);
+
+      updateRatingAfterDaysDateHint();
+    }
+
     function renderGraph() {
       if (!dataset) return;
+
+      updateControlAvailability();
 
       const articles = filteredArticles();
       const graphType = document.getElementById("graphType").value;
@@ -493,6 +614,27 @@
       } else if (graphType === "period-under-word-count") {
         renderPeriodUnderWordCount(articles);
       }
+    }
+
+    const controlIds = [
+      "graphType",
+      "xField",
+      "yField",
+      "ratingDays",
+      "createdAfter",
+      "createdBefore",
+      "requiredTag",
+      "maxWordCount",
+      "binWidth",
+      "periodSize",
+      "wordThreshold",
+      "trendline",
+    ];
+
+    for (const id of controlIds) {
+      document.getElementById(id).addEventListener("change", () => {
+        updateControlAvailability();
+      });
     }
 
     document.getElementById("renderButton").addEventListener("click", renderGraph);
