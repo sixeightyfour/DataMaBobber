@@ -1,0 +1,39 @@
+name: Update SCP -J / -ARC dataset
+
+on:
+  schedule:
+    - cron: "47 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-j-arc-data:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repo
+        uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Build -J / -ARC dataset
+        run: node scripts/build_j_arc_dataset.mjs
+
+      - name: Commit updated -J / -ARC dataset
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          git add docs/data/j_arc_articles.json
+
+          if git diff --cached --quiet; then
+            echo "No -J / -ARC dataset changes."
+          else
+            git commit -m "Update SCP -J / -ARC dataset"
+            git push
+          fi
