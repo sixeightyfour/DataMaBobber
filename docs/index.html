@@ -580,39 +580,124 @@
         `Periods shown: ${sortedKeys.length}\nWord threshold: ${threshold}`;
     }
 
-    function renderTotalRating(articles) {
-      const summary = voteSummaryForArticles(articles);
+    function voteDateFromArticleVote(article, vote) {
+  const created = articleDate(article);
+  const voteDate = new Date(
+    created.getTime() + vote.days_after_creation * 86400000
+  );
 
-      const x = [
-        "Upvotes",
-        "Downvotes",
-        "Composite score",
-      ];
+  return voteDate.toISOString().slice(0, 10);
+}
 
-      const y = [
-        summary.upvotes,
-        summary.downvotes,
-        summary.compositeScore,
-      ];
 
-      Plotly.newPlot("chart", [{
-        type: "bar",
-        x,
-        y,
-        name: "Vote totals",
-      }], {
-        title: "Total Rating Breakdown",
-        xaxis: { title: "Vote category" },
-        yaxis: { title: "Count / score" },
-      }, { responsive: true });
+function buildDailyVoteSeries(articles) {
+  const daily = new Map();
 
-      document.getElementById("stats").textContent =
-        `Articles included: ${articles.length}` +
-        `\nTotal up/down vote records: ${summary.totalVotes}` +
-        `\nUpvotes: ${summary.upvotes}` +
-        `\nDownvotes: ${summary.downvotes}` +
-        `\nComposite score: ${summary.compositeScore}`;
+  for (const article of articles) {
+    for (const vote of article.votes || []) {
+      if (vote.direction !== 1 && vote.direction !== -1) {
+        continue;
+      }
+
+      const dateKey = voteDateFromArticleVote(article, vote);
+
+      if (!daily.has(dateKey)) {
+        daily.set(dateKey, {
+          upvotes: 0,
+          downvotes: 0,
+        });
+      }
+
+      const row = daily.get(dateKey);
+
+      if (vote.direction === 1) {
+        row.upvotes += 1;
+      } else if (vote.direction === -1) {
+        row.downvotes += 1;
+      }
     }
+  }
+
+  const dates = [...daily.keys()].sort();
+
+  const upvotes = [];
+  const downvotes = [];
+  const composite = [];
+
+  for (const date of dates) {
+    const row = daily.get(date);
+
+    upvotes.push(row.upvotes);
+    downvotes.push(row.downvotes);
+    composite.push(row.upvotes - row.downvotes);
+  }
+
+  return {
+    dates,
+    upvotes,
+    downvotes,
+    composite,
+  };
+}
+
+
+function renderTotalRating(articles) {
+  const series = buildDailyVoteSeries(articles);
+
+  if (series.dates.length === 0) {
+    Plotly.newPlot("chart", [], {
+      title: "Daily Vote Activity",
+      xaxis: { title: "Vote date" },
+      yaxis: { title: "Votes" },
+    }, { responsive: true });
+
+    document.getElementById("stats").textContent =
+      `Articles included: ${articles.length}\nNo vote records found.`;
+
+    return;
+  }
+
+  const traces = [
+    {
+      type: "scatter",
+      mode: "lines+markers",
+      x: series.dates,
+      y: series.upvotes,
+      name: "Daily upvotes",
+    },
+    {
+      type: "scatter",
+      mode: "lines+markers",
+      x: series.dates,
+      y: series.downvotes,
+      name: "Daily downvotes",
+    },
+    {
+      type: "scatter",
+      mode: "lines+markers",
+      x: series.dates,
+      y: series.composite,
+      name: "Daily composite score",
+    },
+  ];
+
+  Plotly.newPlot("chart", traces, {
+    title: "Daily Vote Activity",
+    xaxis: { title: "Vote date" },
+    yaxis: { title: "Votes / composite score" },
+  }, { responsive: true });
+
+  const totalUpvotes = series.upvotes.reduce((a, b) => a + b, 0);
+  const totalDownvotes = series.downvotes.reduce((a, b) => a + b, 0);
+  const totalComposite = totalUpvotes - totalDownvotes;
+
+  document.getElementById("stats").textContent =
+    `Articles included: ${articles.length}` +
+    `\nVote days shown: ${series.dates.length}` +
+    `\nTotal upvotes: ${totalUpvotes}` +
+    `\nTotal downvotes: ${totalDownvotes}` +
+    `\nTotal composite score: ${totalComposite}`;
+}
 
     function labelForField(field) {
       const labels = {
