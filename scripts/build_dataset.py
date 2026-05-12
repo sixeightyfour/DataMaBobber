@@ -123,7 +123,9 @@ def build_batch_query(numbers: list[int]) -> str:
             f'''
             {alias}: page(url: "{url}") {{
               url
-              attributions
+              attributions {{
+                user
+              }}
               wikidotInfo {{
                 rating
                 createdAt
@@ -180,26 +182,8 @@ def is_blacklisted_child_url(url: str | None) -> bool:
 
 
 def normalize_attributions(raw_attributions) -> list[str]:
-    """
-    Normalizes page.attributions into a list of user/display names.
-
-    Expected common shape:
-      ["User One", "User Two"]
-
-    This is also defensive against:
-      None
-      "User One"
-      [{"name": "User One"}, {"name": "User Two"}]
-    """
     if not raw_attributions:
         return ["Unknown user"]
-
-    if isinstance(raw_attributions, str):
-        cleaned = raw_attributions.strip()
-        return [cleaned] if cleaned else ["Unknown user"]
-
-    if not isinstance(raw_attributions, list):
-        return [str(raw_attributions)]
 
     output = []
 
@@ -207,22 +191,20 @@ def normalize_attributions(raw_attributions) -> list[str]:
         if item is None:
             continue
 
-        if isinstance(item, str):
-            value = item.strip()
-            if value:
-                output.append(value)
-            continue
-
         if isinstance(item, dict):
-            value = (
-                item.get("name")
-                or item.get("unixName")
-                or item.get("displayName")
-                or item.get("username")
-            )
+            value = item.get("user")
 
             if value:
                 output.append(str(value).strip())
+
+            continue
+
+        if isinstance(item, str):
+            value = item.strip()
+
+            if value:
+                output.append(value)
+
             continue
 
         output.append(str(item).strip())
@@ -232,7 +214,6 @@ def normalize_attributions(raw_attributions) -> list[str]:
     if not output:
         return ["Unknown user"]
 
-    # Preserve order while deduplicating.
     seen = set()
     deduped = []
 
