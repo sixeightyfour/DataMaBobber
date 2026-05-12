@@ -112,6 +112,26 @@
       <input id="createdBefore" type="date">
     </label>
 
+    <label id="minCurrentRatingControl">
+      Minimum current rating
+      <input id="minCurrentRating" type="number" step="1" placeholder="optional">
+    </label>
+
+    <label id="maxCurrentRatingControl">
+      Maximum current rating
+      <input id="maxCurrentRating" type="number" step="1" placeholder="optional">
+    </label>
+
+    <label id="minRatingAfterDaysControl">
+      Minimum rating after N days
+      <input id="minRatingAfterDays" type="number" step="1" placeholder="optional">
+    </label>
+
+    <label id="maxRatingAfterDaysControl">
+      Maximum rating after N days
+      <input id="maxRatingAfterDays" type="number" step="1" placeholder="optional">
+    </label>
+
     <label id="requiredTagControl">
       Required tag
       <input id="requiredTag" type="text" placeholder="optional, e.g. 9000">
@@ -186,6 +206,11 @@
       return new Date(article.createdAt);
     }
 
+    function numberInputValue(id) {
+      const raw = document.getElementById(id).value;
+      return raw === "" ? null : Number(raw);
+    }
+
     function ratingAfterDays(article, days) {
       let total = 0;
 
@@ -228,18 +253,35 @@
       return false;
     }
 
+    function ratingAfterDaysFiltersAreSet() {
+      return (
+        document.getElementById("minRatingAfterDays").value !== "" ||
+        document.getElementById("maxRatingAfterDays").value !== ""
+      );
+    }
+
+    function usesRatingAfterDaysAnywhere() {
+      return selectedGraphUsesRatingAfterDays() || ratingAfterDaysFiltersAreSet();
+    }
+
     function filteredArticles() {
       const createdAfterInput = parseDateOnly(document.getElementById("createdAfter").value);
       const createdBefore = parseDateOnly(document.getElementById("createdBefore").value);
       const requiredTag = document.getElementById("requiredTag").value.trim();
-      const maxWordCountRaw = document.getElementById("maxWordCount").value;
-      const maxWordCount = maxWordCountRaw ? Number(maxWordCountRaw) : null;
 
-      const requiresRatingAfterDaysFloor = selectedGraphUsesRatingAfterDays();
+      const maxWordCount = numberInputValue("maxWordCount");
+
+      const minCurrentRating = numberInputValue("minCurrentRating");
+      const maxCurrentRating = numberInputValue("maxCurrentRating");
+
+      const minRatingAfterDays = numberInputValue("minRatingAfterDays");
+      const maxRatingAfterDays = numberInputValue("maxRatingAfterDays");
+
+      const ratingDays = Number(document.getElementById("ratingDays").value || 14);
 
       let effectiveCreatedAfter = createdAfterInput;
 
-      if (requiresRatingAfterDaysFloor) {
+      if (usesRatingAfterDaysAnywhere()) {
         if (!effectiveCreatedAfter || effectiveCreatedAfter < RATING_AFTER_DAYS_MIN_DATE) {
           effectiveCreatedAfter = RATING_AFTER_DAYS_MIN_DATE;
         }
@@ -254,6 +296,42 @@
         if (requiredTag && !(article.tags || []).includes(requiredTag)) return false;
 
         if (maxWordCount !== null && article.word_count > maxWordCount) return false;
+
+        const currentRating = article.current_rating;
+
+        if (
+          minCurrentRating !== null &&
+          (
+            currentRating === null ||
+            currentRating === undefined ||
+            currentRating < minCurrentRating
+          )
+        ) {
+          return false;
+        }
+
+        if (
+          maxCurrentRating !== null &&
+          (
+            currentRating === null ||
+            currentRating === undefined ||
+            currentRating > maxCurrentRating
+          )
+        ) {
+          return false;
+        }
+
+        if (minRatingAfterDays !== null || maxRatingAfterDays !== null) {
+          const earlyRating = ratingAfterDays(article, ratingDays);
+
+          if (minRatingAfterDays !== null && earlyRating < minRatingAfterDays) {
+            return false;
+          }
+
+          if (maxRatingAfterDays !== null && earlyRating > maxRatingAfterDays) {
+            return false;
+          }
+        }
 
         return true;
       });
@@ -376,8 +454,8 @@
         yaxis: { title: labelForField(yField) },
       }, { responsive: true });
 
-      if (selectedGraphUsesRatingAfterDays()) {
-        statsText += `\nRating-after-N-days filter applied: created after ${RATING_AFTER_DAYS_MIN_DATE_STRING}`;
+      if (usesRatingAfterDaysAnywhere()) {
+        statsText += `\nRating-after-N-days date floor applied: created after ${RATING_AFTER_DAYS_MIN_DATE_STRING}`;
       }
 
       document.getElementById("stats").textContent = statsText;
@@ -411,8 +489,8 @@
 
       let statsText = `Articles histogrammed: ${values.length}`;
 
-      if (selectedGraphUsesRatingAfterDays()) {
-        statsText += `\nRating-after-N-days filter applied: created after ${RATING_AFTER_DAYS_MIN_DATE_STRING}`;
+      if (usesRatingAfterDaysAnywhere()) {
+        statsText += `\nRating-after-N-days date floor applied: created after ${RATING_AFTER_DAYS_MIN_DATE_STRING}`;
       }
 
       document.getElementById("stats").textContent = statsText;
@@ -721,7 +799,7 @@
 
     function updateRatingAfterDaysDateHint() {
       const createdAfterInput = document.getElementById("createdAfter");
-      const usesRatingAfterDays = selectedGraphUsesRatingAfterDays();
+      const usesRatingAfterDays = usesRatingAfterDaysAnywhere();
 
       if (usesRatingAfterDays) {
         createdAfterInput.min = RATING_AFTER_DAYS_MIN_DATE_STRING;
@@ -746,17 +824,26 @@
       const xField = document.getElementById("xField").value;
       const yField = document.getElementById("yField").value;
 
-      const usesRatingAfterDays =
+      const graphUsesRatingAfterDays =
         (isScatter && (xField === "rating_after_days" || yField === "rating_after_days")) ||
         (isHistogram && xField === "rating_after_days");
 
       setControlEnabled("xFieldControl", isScatter || isHistogram);
       setControlEnabled("yFieldControl", isScatter);
 
-      setControlEnabled("ratingDaysControl", usesRatingAfterDays);
+      setControlEnabled(
+        "ratingDaysControl",
+        graphUsesRatingAfterDays || ratingAfterDaysFiltersAreSet()
+      );
 
       setControlEnabled("createdAfterControl", true);
       setControlEnabled("createdBeforeControl", true);
+
+      setControlEnabled("minCurrentRatingControl", true);
+      setControlEnabled("maxCurrentRatingControl", true);
+      setControlEnabled("minRatingAfterDaysControl", true);
+      setControlEnabled("maxRatingAfterDaysControl", true);
+
       setControlEnabled("requiredTagControl", true);
       setControlEnabled("maxWordCountControl", true);
 
@@ -800,6 +887,10 @@
       "ratingDays",
       "createdAfter",
       "createdBefore",
+      "minCurrentRating",
+      "maxCurrentRating",
+      "minRatingAfterDays",
+      "maxRatingAfterDays",
       "requiredTag",
       "maxWordCount",
       "binWidth",
