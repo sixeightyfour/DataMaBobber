@@ -68,7 +68,7 @@
         <option value="time-count">Articles over time</option>
         <option value="running-average">Running average over time</option>
         <option value="period-under-word-count">Articles under word count by period</option>
-        <option value="total-rating">Total rating breakdown</option>
+        <option value="total-rating">Vote activity</option>
       </select>
     </label>
 
@@ -124,8 +124,9 @@
     </label>
 
     <label id="periodSizeControl">
-      Period size
+      Period size / vote grouping
       <select id="periodSize">
+        <option value="day">Daily</option>
         <option value="month">Monthly</option>
         <option value="half-year" selected>Every 6 months</option>
         <option value="year">Yearly</option>
@@ -304,31 +305,6 @@
       return { slope, intercept };
     }
 
-    function voteSummaryForArticles(articles) {
-      let upvotes = 0;
-      let downvotes = 0;
-
-      for (const article of articles) {
-        for (const vote of article.votes || []) {
-          if (vote.direction === 1) {
-            upvotes += 1;
-          } else if (vote.direction === -1) {
-            downvotes += 1;
-          }
-        }
-      }
-
-      const compositeScore = upvotes - downvotes;
-      const totalVotes = upvotes + downvotes;
-
-      return {
-        upvotes,
-        downvotes,
-        compositeScore,
-        totalVotes,
-      };
-    }
-
     function renderScatter(articles) {
       const xField = document.getElementById("xField").value;
       const yField = document.getElementById("yField").value;
@@ -442,6 +418,10 @@
       const year = date.getUTCFullYear();
       const month = date.getUTCMonth();
 
+      if (periodSize === "day") {
+        return date.toISOString().slice(0, 10);
+      }
+
       if (periodSize === "year") {
         return `${year}-01-01`;
       }
@@ -451,6 +431,17 @@
       }
 
       return `${year}-${String(month + 1).padStart(2, "0")}-01`;
+    }
+
+    function labelForPeriod(periodSize) {
+      const labels = {
+        day: "day",
+        month: "month",
+        "half-year": "6-month period",
+        year: "year",
+      };
+
+      return labels[periodSize] || periodSize;
     }
 
     function renderTimeCount(articles) {
@@ -571,133 +562,133 @@
         y: sortedKeys.map(key => counts.get(key)),
         name: `Articles under ${threshold} words`
       }], {
-        title: `Articles under ${threshold} words by period`,
+        title: `Articles under ${threshold} words by ${labelForPeriod(periodSize)}`,
         xaxis: { title: "Period" },
         yaxis: { title: "Number of articles" },
       }, { responsive: true });
 
       document.getElementById("stats").textContent =
-        `Periods shown: ${sortedKeys.length}\nWord threshold: ${threshold}`;
+        `Periods shown: ${sortedKeys.length}\nGrouping: ${labelForPeriod(periodSize)}\nWord threshold: ${threshold}`;
     }
 
     function voteDateFromArticleVote(article, vote) {
-  const created = articleDate(article);
-  const voteDate = new Date(
-    created.getTime() + vote.days_after_creation * 86400000
-  );
-
-  return voteDate.toISOString().slice(0, 10);
-}
-
-
-function buildDailyVoteSeries(articles) {
-  const daily = new Map();
-
-  for (const article of articles) {
-    for (const vote of article.votes || []) {
-      if (vote.direction !== 1 && vote.direction !== -1) {
-        continue;
-      }
-
-      const dateKey = voteDateFromArticleVote(article, vote);
-
-      if (!daily.has(dateKey)) {
-        daily.set(dateKey, {
-          upvotes: 0,
-          downvotes: 0,
-        });
-      }
-
-      const row = daily.get(dateKey);
-
-      if (vote.direction === 1) {
-        row.upvotes += 1;
-      } else if (vote.direction === -1) {
-        row.downvotes += 1;
-      }
+      const created = articleDate(article);
+      return new Date(
+        created.getTime() + vote.days_after_creation * 86400000
+      );
     }
-  }
 
-  const dates = [...daily.keys()].sort();
+    function buildVoteSeries(articles) {
+      const periodSize = document.getElementById("periodSize").value;
+      const grouped = new Map();
 
-  const upvotes = [];
-  const downvotes = [];
-  const composite = [];
+      for (const article of articles) {
+        for (const vote of article.votes || []) {
+          if (vote.direction !== 1 && vote.direction !== -1) {
+            continue;
+          }
 
-  for (const date of dates) {
-    const row = daily.get(date);
+          const voteDate = voteDateFromArticleVote(article, vote);
+          const key = periodKey(voteDate, periodSize);
 
-    upvotes.push(row.upvotes);
-    downvotes.push(row.downvotes);
-    composite.push(row.upvotes - row.downvotes);
-  }
+          if (!grouped.has(key)) {
+            grouped.set(key, {
+              upvotes: 0,
+              downvotes: 0,
+            });
+          }
 
-  return {
-    dates,
-    upvotes,
-    downvotes,
-    composite,
-  };
-}
+          const row = grouped.get(key);
 
+          if (vote.direction === 1) {
+            row.upvotes += 1;
+          } else if (vote.direction === -1) {
+            row.downvotes += 1;
+          }
+        }
+      }
 
-function renderTotalRating(articles) {
-  const series = buildDailyVoteSeries(articles);
+      const dates = [...grouped.keys()].sort();
 
-  if (series.dates.length === 0) {
-    Plotly.newPlot("chart", [], {
-      title: "Daily Vote Activity",
-      xaxis: { title: "Vote date" },
-      yaxis: { title: "Votes" },
-    }, { responsive: true });
+      const upvotes = [];
+      const downvotes = [];
+      const composite = [];
 
-    document.getElementById("stats").textContent =
-      `Articles included: ${articles.length}\nNo vote records found.`;
+      for (const date of dates) {
+        const row = grouped.get(date);
 
-    return;
-  }
+        upvotes.push(row.upvotes);
+        downvotes.push(row.downvotes);
+        composite.push(row.upvotes - row.downvotes);
+      }
 
-  const traces = [
-    {
-      type: "scatter",
-      mode: "lines+markers",
-      x: series.dates,
-      y: series.upvotes,
-      name: "Daily upvotes",
-    },
-    {
-      type: "scatter",
-      mode: "lines+markers",
-      x: series.dates,
-      y: series.downvotes,
-      name: "Daily downvotes",
-    },
-    {
-      type: "scatter",
-      mode: "lines+markers",
-      x: series.dates,
-      y: series.composite,
-      name: "Daily composite score",
-    },
-  ];
+      return {
+        dates,
+        upvotes,
+        downvotes,
+        composite,
+        periodSize,
+      };
+    }
 
-  Plotly.newPlot("chart", traces, {
-    title: "Daily Vote Activity",
-    xaxis: { title: "Vote date" },
-    yaxis: { title: "Votes / composite score" },
-  }, { responsive: true });
+    function renderTotalRating(articles) {
+      const series = buildVoteSeries(articles);
 
-  const totalUpvotes = series.upvotes.reduce((a, b) => a + b, 0);
-  const totalDownvotes = series.downvotes.reduce((a, b) => a + b, 0);
-  const totalComposite = totalUpvotes - totalDownvotes;
+      if (series.dates.length === 0) {
+        Plotly.newPlot("chart", [], {
+          title: "Vote Activity",
+          xaxis: { title: "Vote period" },
+          yaxis: { title: "Votes" },
+        }, { responsive: true });
 
-  document.getElementById("stats").textContent =
-    `Articles included: ${articles.length}` +
-    `\nVote days shown: ${series.dates.length}` +
-    `\nTotal upvotes: ${totalUpvotes}` +
-    `\nTotal downvotes: ${totalDownvotes}` +
-    `\nTotal composite score: ${totalComposite}`;
-}
+        document.getElementById("stats").textContent =
+          `Articles included: ${articles.length}\nNo vote records found.`;
+
+        return;
+      }
+
+      const traces = [
+        {
+          type: "scatter",
+          mode: "lines+markers",
+          x: series.dates,
+          y: series.upvotes,
+          name: "Upvotes",
+        },
+        {
+          type: "scatter",
+          mode: "lines+markers",
+          x: series.dates,
+          y: series.downvotes,
+          name: "Downvotes",
+        },
+        {
+          type: "scatter",
+          mode: "lines+markers",
+          x: series.dates,
+          y: series.composite,
+          name: "Composite score",
+        },
+      ];
+
+      Plotly.newPlot("chart", traces, {
+        title: `Vote Activity by ${labelForPeriod(series.periodSize)}`,
+        xaxis: { title: "Vote period" },
+        yaxis: { title: "Votes / composite score" },
+      }, { responsive: true });
+
+      const totalUpvotes = series.upvotes.reduce((a, b) => a + b, 0);
+      const totalDownvotes = series.downvotes.reduce((a, b) => a + b, 0);
+      const totalComposite = totalUpvotes - totalDownvotes;
+
+      document.getElementById("stats").textContent =
+        `Articles included: ${articles.length}` +
+        `\nVote periods shown: ${series.dates.length}` +
+        `\nGrouping: ${labelForPeriod(series.periodSize)}` +
+        `\nTotal upvotes: ${totalUpvotes}` +
+        `\nTotal downvotes: ${totalDownvotes}` +
+        `\nTotal composite score: ${totalComposite}`;
+    }
 
     function labelForField(field) {
       const labels = {
@@ -746,6 +737,7 @@ function renderTotalRating(articles) {
       const isHistogram = graphType === "histogram";
       const isTimeCount = graphType === "time-count";
       const isPeriodUnderWordCount = graphType === "period-under-word-count";
+      const isTotalRating = graphType === "total-rating";
 
       const xField = document.getElementById("xField").value;
       const yField = document.getElementById("yField").value;
@@ -766,7 +758,7 @@ function renderTotalRating(articles) {
 
       setControlEnabled("binWidthControl", isHistogram);
 
-      setControlEnabled("periodSizeControl", isPeriodUnderWordCount);
+      setControlEnabled("periodSizeControl", isPeriodUnderWordCount || isTotalRating);
       setControlEnabled("wordThresholdControl", isPeriodUnderWordCount);
 
       setControlEnabled("trendlineControl", isScatter || isTimeCount);
