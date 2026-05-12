@@ -3,29 +3,25 @@ import re
 import time
 from datetime import datetime, timezone
 from pathlib import Path
+
 import requests
 
 
 CROM_ENDPOINT = "https://apiv1.crom.avn.sh/graphql"
 
-# Articles being queried (002-9999)
 START = 2
 END = 9999
 
-# Number of pages requested per query
-BATCH_SIZE = 25
-
-# Rate limiter
+BATCH_SIZE = 15
 REQUEST_DELAY_SECONDS = 0.25
 
 OUTPUT_PATH = Path("docs/data/scp_articles.json")
 
-# Prevents double counting of accessibility mode page
 BLACKLISTED_CHILD_URLS = {
     "http://scp-wiki.wikidot.com/fragment:scp-8980-1",
 }
 
-# Blocks in source that should always be excluded that contain additional words outside of brackets
+
 NON_CONTENT_BLOCKS = {
     "code",
     "html",
@@ -33,7 +29,6 @@ NON_CONTENT_BLOCKS = {
     "math",
 }
 
-# Blocks in source that should always be excluded and do not contain additional words outside of brackets
 NON_CONTENT_STANDALONE_BLOCKS = {
     "toc",
     "f toc",
@@ -49,7 +44,6 @@ NON_CONTENT_STANDALONE_BLOCKS = {
     "include-elements",
 }
 
-# Blocks that contain material that should be included in word count
 CONTENT_WRAPPER_BLOCKS = {
     "div",
     "div_",
@@ -108,7 +102,7 @@ CONTENT_WRAPPER_BLOCKS = {
     "super",
 }
 
-# Builds URL for query
+
 def scp_url(n: int) -> str:
     if n < 1000:
         slug = f"scp-{n:03d}"
@@ -117,7 +111,7 @@ def scp_url(n: int) -> str:
 
     return f"http://scp-wiki.wikidot.com/{slug}"
 
-# Query skeleton for batch fetch
+
 def build_batch_query(numbers: list[int]) -> str:
     parts = []
 
@@ -129,6 +123,7 @@ def build_batch_query(numbers: list[int]) -> str:
             f'''
             {alias}: page(url: "{url}") {{
               url
+              attributions
               wikidotInfo {{
                 rating
                 createdAt
@@ -151,7 +146,7 @@ def build_batch_query(numbers: list[int]) -> str:
 
     return "query SCPFullDatasetBatch {\n" + "\n".join(parts) + "\n}"
 
-# Runs query 
+
 def run_query(query: str) -> dict:
     response = requests.post(
         CROM_ENDPOINT,
@@ -167,14 +162,14 @@ def run_query(query: str) -> dict:
 
     return payload["data"]
 
-# Normalize URLs for checking blacklist
+
 def normalize_url(url: str | None) -> str:
     if not url:
         return ""
 
     return url.strip().rstrip("/")
 
-# Prevents double counting of articles with child pages containing the same contents 
+
 def is_blacklisted_child_url(url: str | None) -> bool:
     normalized_blacklist = {
         normalize_url(u)
@@ -183,7 +178,91 @@ def is_blacklisted_child_url(url: str | None) -> bool:
 
     return normalize_url(url) in normalized_blacklist
 
-# Normalize Date and Time 
+
+def normalize_attributions(raw_attributions) -> list[str]:
+    """
+    Normalizes page.attributions into a list of user/display names.
+
+    Expected common shape:
+      ["User One", "User Two"]
+
+    This is also defensive against:
+      None
+      "User One"
+      [{"name": "User One"}, {"name": "User Two"}]
+    """
+    if not raw_attributions:
+        return ["Unknown user"]
+
+    if isinstance(raw_attributions, str):
+        cleaned = raw_attributions.strip()
+        return [cleaned] if cleaned else ["Unknown user"]
+
+    if not isinstance(raw_attributions, list):
+        return [str(raw_attributions)]
+
+    output = []
+
+    for item in raw_attributions:
+        if item is None:
+            continue
+
+        if isinstance(item, str):
+            value = item.strip()
+            if value:
+                output.append(value)
+            continue
+
+        if isinstance(item, dict):
+            value = (
+                item.get("name")
+                or item.get("unixName")
+                or item.get("displayName")
+                or item.get("username")
+            )
+
+            if value:
+                output.append(str(value).strip())
+            continue
+
+        output.append(str(item).strip())
+
+    output = [name for name in output if name]
+
+    if not output:
+        return ["Unknown user"]
+
+    # Preserve order while deduplicating.
+    seen = set()
+    deduped = []
+
+    for name in output:
+        key = name.casefold()
+
+        if key in seen:
+            continue
+
+        seen.add(key)
+        deduped.append(name)
+
+    return deduped
+
+
+def poster_from_attributions(attributions: list[str]) -> dict:
+    """
+    Backward-compatible single-poster field.
+
+    For coauthored pages, this uses the first listed attribution.
+    Use `attributions` for full multi-author analysis.
+    """
+    first = attributions[0] if attributions else "Unknown user"
+
+    return {
+        "name": first,
+        "unixName": first,
+    }
+
+
 def parse_datetime(value: str | None) -> datetime | None:
     if not value:
         return None
@@ -200,7 +279,7 @@ def parse_datetime(value: str | None) -> datetime | None:
 
     return parsed.astimezone(timezone.utc)
 
-# Vote records for time-normalized queries (i.e. Rating after X days published)
+
 def vote_direction_value(direction) -> int:
     if direction in (1, "+1"):
         return 1
@@ -219,7 +298,7 @@ def vote_direction_value(direction) -> int:
 
     return 0
 
-# Removes licensebox 
+
 def remove_licensebox_blocks(text: str) -> str:
     pattern = (
         r"\[\[include\s+:scp-wiki:component:license-box\b.*?"
@@ -228,7 +307,7 @@ def remove_licensebox_blocks(text: str) -> str:
 
     return re.sub(pattern, " ", text, flags=re.IGNORECASE | re.DOTALL)
 
-# Removes NON_CONTENT_BLOCKS
+
 def remove_non_content_paired_blocks(text: str) -> str:
     for block_name in NON_CONTENT_BLOCKS:
         pattern = (
@@ -248,7 +327,7 @@ def remove_non_content_paired_blocks(text: str) -> str:
 
     return text
 
-# Removes NON_CONTENT_STANDALONE_BLOCKS
+
 def remove_non_content_standalone_blocks(text: str) -> str:
     block_names = sorted(
         NON_CONTENT_STANDALONE_BLOCKS,
@@ -261,7 +340,7 @@ def remove_non_content_standalone_blocks(text: str) -> str:
 
     return re.sub(pattern, " ", text, flags=re.IGNORECASE)
 
-# Normalizes tags
+
 def strip_content_wrapper_tags(text: str) -> str:
     block_names = sorted(
         CONTENT_WRAPPER_BLOCKS,
@@ -287,7 +366,7 @@ def strip_content_wrapper_tags(text: str) -> str:
 
     return text
 
-# Removes hyperlinks
+
 def convert_links_to_visible_text(text: str) -> str:
     text = re.sub(
         r"\[\[\[\s*[^\]|]+\s*\|\s*([^\]]+?)\s*\]\]\]",
@@ -324,14 +403,14 @@ def convert_links_to_visible_text(text: str) -> str:
 
     return text
 
-# Removes CSS variables from source 
+
 def remove_variables_and_generated_tokens(text: str) -> str:
     text = re.sub(r"%%[^%]+%%", " ", text)
     text = re.sub(r"\{\$[^}]+\}", " ", text)
 
     return text
 
-# Removes wiki formatting from source
+
 def strip_formatting_syntax(text: str) -> str:
     text = re.sub(r"##\s*[^|\n#]+?\|", " ", text)
 
@@ -359,7 +438,7 @@ def strip_formatting_syntax(text: str) -> str:
 
     return text
 
-# Uses helpers to filter source for word count estimate
+
 def clean_source_text(source: str) -> str:
     if not source:
         return ""
@@ -393,7 +472,7 @@ def clean_source_text(source: str) -> str:
 
     return text
 
-# Word count
+
 def count_words(text: str) -> int:
     words = re.findall(
         r"\b[A-Za-z0-9]+(?:['’\-][A-Za-z0-9]+)*\b",
@@ -402,11 +481,11 @@ def count_words(text: str) -> int:
 
     return len(words)
 
-# Word count in entire source text
+
 def count_source_words(source: str) -> int:
     return count_words(clean_source_text(source))
 
-# Word count in article content
+
 def article_word_count(info: dict) -> dict:
     parent_source = info.get("source") or ""
     parent_word_count = count_source_words(parent_source)
@@ -440,7 +519,7 @@ def article_word_count(info: dict) -> dict:
         "blacklisted_children_excluded": blacklisted_children_excluded,
     }
 
-# Reduces size of Crom's coarseVoteRecords output for better storage
+
 def compact_votes(vote_records: list[dict], created_at: datetime) -> list[dict]:
     compact = []
 
@@ -466,7 +545,7 @@ def compact_votes(vote_records: list[dict], created_at: datetime) -> list[dict]:
     compact.sort(key=lambda v: v["days_after_creation"])
     return compact
 
-# Stores page info
+
 def process_page(n: int, page: dict | None) -> dict | None:
     url = scp_url(n)
 
@@ -481,6 +560,7 @@ def process_page(n: int, page: dict | None) -> dict | None:
     if created_at is None:
         return None
 
+    attributions = normalize_attributions(page.get("attributions"))
     word_details = article_word_count(info)
 
     return {
@@ -489,6 +569,14 @@ def process_page(n: int, page: dict | None) -> dict | None:
         "createdAt": created_at.isoformat(),
         "createdDate": created_at.date().isoformat(),
         "current_rating": info.get("rating"),
+
+        # Multi-author field. Use this for user/coauthor analysis.
+        "attributions": attributions,
+
+        # Backward-compatible single-user field.
+        # This is the first attribution only.
+        "poster": poster_from_attributions(attributions),
+
         "tags": info.get("tags") or [],
         "word_count": word_details["word_count"],
         "parent_word_count": word_details["parent_word_count"],
@@ -498,7 +586,7 @@ def process_page(n: int, page: dict | None) -> dict | None:
         "votes": compact_votes(info.get("coarseVoteRecords") or [], created_at),
     }
 
-# Batch fetching
+
 def fetch_dataset() -> list[dict]:
     articles = []
     numbers = list(range(START, END + 1))
@@ -523,7 +611,7 @@ def fetch_dataset() -> list[dict]:
     articles.sort(key=lambda row: row["scp_number"])
     return articles
 
-# Saves data from Crom to JSON
+
 def save_dataset(articles: list[dict]) -> None:
     OUTPUT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
