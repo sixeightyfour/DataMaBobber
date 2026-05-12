@@ -107,11 +107,16 @@ function isBlacklistedChildUrl(url) {
 }
 
 function wikidotUrlFromSlug(slug) {
-  return `http://scp-wiki.wikidot.com/${slug}`;
+  return `http://scp-wiki.wikidot.com/${normalizeSlug(slug)}`;
 }
 
 function normalizeSlug(rawSlug) {
-  return rawSlug.trim().replace(/\s+/g, "-");
+  return rawSlug
+    .trim()
+    .replace(/\\/g, "")
+    .replace(/&#x20;/gi, " ")
+    .replace(/\s+/g, "-")
+    .toLowerCase();
 }
 
 function extractSlugFromTripleBracket(inner) {
