@@ -1,0 +1,511 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SCP -J / -ARC Graph Builder</title>
+  <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 24px;
+      line-height: 1.4;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 12px;
+      margin-bottom: 20px;
+      max-width: 1200px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-size: 14px;
+      gap: 4px;
+    }
+
+    input, select, button {
+      font: inherit;
+      padding: 6px;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    #chart {
+      width: 100%;
+      height: 750px;
+    }
+
+    #stats {
+      margin-top: 12px;
+      white-space: pre-wrap;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+  </style>
+</head>
+<body>
+  <p><a href="../">Back to mainlist graph builder</a></p>
+
+  <h1>SCP -J / -ARC Graph Builder</h1>
+
+  <div class="controls">
+    <label>
+      Dataset
+      <select id="datasetKind">
+        <option value="both">-J and -ARC</option>
+        <option value="J">-J only</option>
+        <option value="ARC">-ARC only</option>
+      </select>
+    </label>
+
+    <label>
+      Graph type
+      <select id="graphType">
+        <option value="scatter">Scatter</option>
+        <option value="histogram">Histogram</option>
+        <option value="time-count">Articles over time</option>
+        <option value="running-average">Running average word count over time</option>
+      </select>
+    </label>
+
+    <label>
+      X axis
+      <select id="xField">
+        <option value="word_count">Word count</option>
+        <option value="createdAt">Created date</option>
+        <option value="current_rating">Current rating</option>
+        <option value="rating_after_days">Rating after N days</option>
+      </select>
+    </label>
+
+    <label>
+      Y axis
+      <select id="yField">
+        <option value="current_rating">Current rating</option>
+        <option value="rating_after_days">Rating after N days</option>
+        <option value="word_count">Word count</option>
+      </select>
+    </label>
+
+    <label>
+      Rating window, days
+      <input id="ratingDays" type="number" value="14" min="0" step="1">
+    </label>
+
+    <label>
+      Created after
+      <input id="createdAfter" type="date">
+    </label>
+
+    <label>
+      Created before
+      <input id="createdBefore" type="date">
+    </label>
+
+    <label>
+      Minimum current rating
+      <input id="minCurrentRating" type="number" step="1" placeholder="optional">
+    </label>
+
+    <label>
+      Maximum current rating
+      <input id="maxCurrentRating" type="number" step="1" placeholder="optional">
+    </label>
+
+    <label>
+      Max word count
+      <input id="maxWordCount" type="number" min="0" step="100" placeholder="optional">
+    </label>
+
+    <label>
+      Histogram bin width
+      <input id="binWidth" type="number" value="100" min="1" step="50">
+    </label>
+
+    <label>
+      Trendline
+      <select id="trendline">
+        <option value="yes" selected>Yes</option>
+        <option value="no">No</option>
+      </select>
+    </label>
+
+    <button id="renderButton">Render graph</button>
+  </div>
+
+  <div id="chart"></div>
+  <div id="stats">Loading dataset...</div>
+
+  <script>
+    let dataset = null;
+
+    async function loadDataset() {
+      const response = await fetch("../data/j_arc_articles.json");
+
+      if (!response.ok) {
+        throw new Error(`Failed to load dataset: ${response.status}`);
+      }
+
+      dataset = await response.json();
+
+      renderGraph();
+    }
+
+    function parseDateOnly(value) {
+      if (!value) return null;
+      return new Date(`${value}T00:00:00Z`);
+    }
+
+    function articleDate(article) {
+      return new Date(article.createdAt);
+    }
+
+    function numberInputValue(id) {
+      const raw = document.getElementById(id).value;
+      return raw === "" ? null : Number(raw);
+    }
+
+    function ratingAfterDays(article, days) {
+      let total = 0;
+
+      for (const vote of article.votes || []) {
+        if (vote.days_after_creation >= 0 && vote.days_after_creation < days) {
+          total += vote.direction;
+        }
+      }
+
+      return total;
+    }
+
+    function getFieldValue(article, field) {
+      const days = Number(document.getElementById("ratingDays").value || 14);
+
+      if (field === "rating_after_days") {
+        return ratingAfterDays(article, days);
+      }
+
+      if (field === "createdAt") {
+        return articleDate(article);
+      }
+
+      return article[field];
+    }
+
+    function filteredArticles() {
+      const datasetKind = document.getElementById("datasetKind").value;
+      const createdAfter = parseDateOnly(document.getElementById("createdAfter").value);
+      const createdBefore = parseDateOnly(document.getElementById("createdBefore").value);
+
+      const minCurrentRating = numberInputValue("minCurrentRating");
+      const maxCurrentRating = numberInputValue("maxCurrentRating");
+      const maxWordCount = numberInputValue("maxWordCount");
+
+      return (dataset.articles || []).filter(article => {
+        if (datasetKind !== "both" && article.dataset_kind !== datasetKind) {
+          return false;
+        }
+
+        const created = articleDate(article);
+
+        if (createdAfter && created <= createdAfter) return false;
+        if (createdBefore && created >= createdBefore) return false;
+
+        if (maxWordCount !== null && article.word_count > maxWordCount) {
+          return false;
+        }
+
+        const currentRating = article.current_rating;
+
+        if (
+          minCurrentRating !== null &&
+          (
+            currentRating === null ||
+            currentRating === undefined ||
+            currentRating < minCurrentRating
+          )
+        ) {
+          return false;
+        }
+
+        if (
+          maxCurrentRating !== null &&
+          (
+            currentRating === null ||
+            currentRating === undefined ||
+            currentRating > maxCurrentRating
+          )
+        ) {
+          return false;
+        }
+
+        return true;
+      });
+    }
+
+    function pearsonR(x, y) {
+      const n = x.length;
+      if (n < 2) return null;
+
+      const meanX = x.reduce((a, b) => a + b, 0) / n;
+      const meanY = y.reduce((a, b) => a + b, 0) / n;
+
+      let numerator = 0;
+      let denomX = 0;
+      let denomY = 0;
+
+      for (let i = 0; i < n; i++) {
+        const dx = x[i] - meanX;
+        const dy = y[i] - meanY;
+
+        numerator += dx * dy;
+        denomX += dx * dx;
+        denomY += dy * dy;
+      }
+
+      const denominator = Math.sqrt(denomX * denomY);
+
+      if (denominator === 0) return null;
+
+      return numerator / denominator;
+    }
+
+    function linearRegression(x, y) {
+      const n = x.length;
+      if (n < 2) return null;
+
+      const meanX = x.reduce((a, b) => a + b, 0) / n;
+      const meanY = y.reduce((a, b) => a + b, 0) / n;
+
+      let numerator = 0;
+      let denominator = 0;
+
+      for (let i = 0; i < n; i++) {
+        numerator += (x[i] - meanX) * (y[i] - meanY);
+        denominator += (x[i] - meanX) ** 2;
+      }
+
+      if (denominator === 0) return null;
+
+      const slope = numerator / denominator;
+      const intercept = meanY - slope * meanX;
+
+      return { slope, intercept };
+    }
+
+    function labelForField(field) {
+      const labels = {
+        word_count: "Word count",
+        createdAt: "Created date",
+        current_rating: "Current rating",
+        rating_after_days: `Rating after ${document.getElementById("ratingDays").value || 14} days`,
+      };
+
+      return labels[field] || field;
+    }
+
+    function renderScatter(articles) {
+      const xField = document.getElementById("xField").value;
+      const yField = document.getElementById("yField").value;
+      const includeTrendline = document.getElementById("trendline").value === "yes";
+
+      const points = articles
+        .map(article => ({
+          article,
+          x: getFieldValue(article, xField),
+          y: getFieldValue(article, yField),
+        }))
+        .filter(point =>
+          point.x !== null &&
+          point.x !== undefined &&
+          point.y !== null &&
+          point.y !== undefined
+        );
+
+      const x = points.map(point => point.x);
+      const y = points.map(point => point.y);
+
+      const traces = [{
+        type: "scatter",
+        mode: "markers",
+        x,
+        y,
+        text: points.map(point => `${point.article.slug}<br>${point.article.url}`),
+        marker: { size: 7, opacity: 0.6 },
+        name: "Articles",
+      }];
+
+      let statsText = `Articles plotted: ${points.length}`;
+
+      const numericX = x.every(value => typeof value === "number" && Number.isFinite(value));
+      const numericY = y.every(value => typeof value === "number" && Number.isFinite(value));
+
+      if (includeTrendline && numericX && numericY && points.length >= 2) {
+        const r = pearsonR(x, y);
+        const regression = linearRegression(x, y);
+
+        if (r !== null && regression !== null) {
+          const minX = Math.min(...x);
+          const maxX = Math.max(...x);
+
+          traces.push({
+            type: "scatter",
+            mode: "lines",
+            x: [minX, maxX],
+            y: [
+              regression.slope * minX + regression.intercept,
+              regression.slope * maxX + regression.intercept,
+            ],
+            name: `Trendline: y = ${regression.slope.toFixed(5)}x + ${regression.intercept.toFixed(2)}`,
+          });
+
+          statsText += `\nPearson r: ${r.toFixed(6)}`;
+          statsText += `\nTrendline slope: ${regression.slope.toFixed(6)}`;
+          statsText += `\nTrendline intercept: ${regression.intercept.toFixed(6)}`;
+        }
+      }
+
+      Plotly.newPlot("chart", traces, {
+        title: `${labelForField(yField)} vs ${labelForField(xField)}`,
+        xaxis: { title: labelForField(xField) },
+        yaxis: { title: labelForField(yField) },
+      }, { responsive: true });
+
+      document.getElementById("stats").textContent = statsText;
+    }
+
+    function renderHistogram(articles) {
+      const xField = document.getElementById("xField").value;
+      const binWidth = Number(document.getElementById("binWidth").value || 100);
+
+      const values = articles
+        .map(article => getFieldValue(article, xField))
+        .filter(value =>
+          value !== null &&
+          value !== undefined &&
+          typeof value === "number" &&
+          Number.isFinite(value)
+        );
+
+      Plotly.newPlot("chart", [{
+        type: "histogram",
+        x: values,
+        xbins: { size: binWidth },
+        name: "Articles",
+      }], {
+        title: `${labelForField(xField)} distribution`,
+        xaxis: { title: labelForField(xField) },
+        yaxis: { title: "Number of articles" },
+      }, { responsive: true });
+
+      document.getElementById("stats").textContent =
+        `Articles histogrammed: ${values.length}`;
+    }
+
+    function renderTimeCount(articles) {
+      const sorted = [...articles].sort((a, b) => articleDate(a) - articleDate(b));
+
+      let running = 0;
+      const byDate = new Map();
+
+      for (const article of sorted) {
+        running += 1;
+        byDate.set(article.createdDate, running);
+      }
+
+      Plotly.newPlot("chart", [{
+        type: "scatter",
+        mode: "lines",
+        x: [...byDate.keys()],
+        y: [...byDate.values()],
+        name: "Cumulative articles",
+      }], {
+        title: "Cumulative -J / -ARC articles over time",
+        xaxis: { title: "Created date" },
+        yaxis: { title: "Article count" },
+      }, { responsive: true });
+
+      document.getElementById("stats").textContent =
+        `Articles counted: ${articles.length}`;
+    }
+
+    function renderRunningAverage(articles) {
+      const sorted = [...articles].sort((a, b) => articleDate(a) - articleDate(b));
+
+      let runningWords = 0;
+      let runningArticles = 0;
+      const byDate = new Map();
+
+      for (const article of sorted) {
+        runningWords += article.word_count;
+        runningArticles += 1;
+        byDate.set(article.createdDate, runningWords / runningArticles);
+      }
+
+      const y = [...byDate.values()];
+
+      Plotly.newPlot("chart", [{
+        type: "scatter",
+        mode: "lines",
+        x: [...byDate.keys()],
+        y,
+        name: "Running average",
+      }], {
+        title: "Running average word count over time",
+        xaxis: { title: "Created date" },
+        yaxis: { title: "Average words per article" },
+      }, { responsive: true });
+
+      document.getElementById("stats").textContent =
+        `Articles counted: ${articles.length}` +
+        (y.length ? `\nFinal running average: ${y.at(-1).toFixed(2)} words` : "");
+    }
+
+    function renderGraph() {
+      if (!dataset) return;
+
+      const articles = filteredArticles();
+      const graphType = document.getElementById("graphType").value;
+
+      if (graphType === "scatter") {
+        renderScatter(articles);
+      } else if (graphType === "histogram") {
+        renderHistogram(articles);
+      } else if (graphType === "time-count") {
+        renderTimeCount(articles);
+      } else if (graphType === "running-average") {
+        renderRunningAverage(articles);
+      }
+    }
+
+    const controlIds = [
+      "datasetKind",
+      "graphType",
+      "xField",
+      "yField",
+      "ratingDays",
+      "createdAfter",
+      "createdBefore",
+      "minCurrentRating",
+      "maxCurrentRating",
+      "maxWordCount",
+      "binWidth",
+      "trendline",
+    ];
+
+    for (const id of controlIds) {
+      document.getElementById(id).addEventListener("change", renderGraph);
+    }
+
+    document.getElementById("renderButton").addEventListener("click", renderGraph);
+
+    loadDataset().catch(error => {
+      document.getElementById("stats").textContent = String(error);
+      console.error(error);
+    });
+  </script>
+</body>
+</html>
