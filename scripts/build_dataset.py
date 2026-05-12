@@ -124,7 +124,9 @@ def build_batch_query(numbers: list[int]) -> str:
             {alias}: page(url: "{url}") {{
               url
               attributions {{
-                user
+                user {{
+                  name
+                }}
               }}
               wikidotInfo {{
                 rating
@@ -182,6 +184,15 @@ def is_blacklisted_child_url(url: str | None) -> bool:
 
 
 def normalize_attributions(raw_attributions) -> list[str]:
+    """
+    Normalizes page.attributions { user { name } } into a list of names.
+
+    Expected shape:
+      [
+        {"user": {"name": "User One"}},
+        {"user": {"name": "User Two"}}
+      ]
+    """
     if not raw_attributions:
         return ["Unknown user"]
 
@@ -192,7 +203,12 @@ def normalize_attributions(raw_attributions) -> list[str]:
             continue
 
         if isinstance(item, dict):
-            value = item.get("user")
+            user = item.get("user")
+
+            if isinstance(user, dict):
+                value = user.get("name")
+            else:
+                value = user
 
             if value:
                 output.append(str(value).strip())
