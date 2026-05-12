@@ -429,6 +429,7 @@
 
     function renderTimeCount(articles) {
       const sorted = [...articles].sort((a, b) => articleDate(a) - articleDate(b));
+      const includeTrendline = document.getElementById("trendline").value === "yes";
 
       let running = 0;
       const byDate = new Map();
@@ -441,20 +442,52 @@
       const x = [...byDate.keys()];
       const y = [...byDate.values()];
 
-      Plotly.newPlot("chart", [{
+      const traces = [{
         type: "scatter",
         mode: "lines",
         x,
         y,
         name: "Cumulative articles"
-      }], {
+      }];
+
+      let statsText = `Articles counted: ${articles.length}`;
+
+      if (includeTrendline && x.length >= 2) {
+        const xNumeric = x.map(dateString => new Date(`${dateString}T00:00:00Z`).getTime() / 86400000);
+        const regression = linearRegression(xNumeric, y);
+        const r = pearsonR(xNumeric, y);
+
+        if (regression !== null && r !== null) {
+          const minX = Math.min(...xNumeric);
+          const maxX = Math.max(...xNumeric);
+
+          const minDate = new Date(minX * 86400000).toISOString().slice(0, 10);
+          const maxDate = new Date(maxX * 86400000).toISOString().slice(0, 10);
+
+          traces.push({
+            type: "scatter",
+            mode: "lines",
+            x: [minDate, maxDate],
+            y: [
+              regression.slope * minX + regression.intercept,
+              regression.slope * maxX + regression.intercept,
+            ],
+            name: `Trendline: ${regression.slope.toFixed(3)} articles/day`
+          });
+
+          statsText += `\nPearson r: ${r.toFixed(6)}`;
+          statsText += `\nTrendline slope: ${regression.slope.toFixed(6)} articles/day`;
+          statsText += `\nTrendline intercept: ${regression.intercept.toFixed(6)}`;
+        }
+      }
+
+      Plotly.newPlot("chart", traces, {
         title: "Cumulative articles over time",
         xaxis: { title: "Created date" },
         yaxis: { title: "Article count" },
       }, { responsive: true });
 
-      document.getElementById("stats").textContent =
-        `Articles counted: ${articles.length}`;
+      document.getElementById("stats").textContent = statsText;
     }
 
     function renderRunningAverage(articles) {
@@ -567,6 +600,7 @@
       const isScatter = graphType === "scatter";
       const isHistogram = graphType === "histogram";
       const isPeriodUnderWordCount = graphType === "period-under-word-count";
+      const isTimeCount = graphType === "time-count";
 
       const xField = document.getElementById("xField").value;
       const yField = document.getElementById("yField").value;
@@ -590,7 +624,7 @@
       setControlEnabled("periodSizeControl", isPeriodUnderWordCount);
       setControlEnabled("wordThresholdControl", isPeriodUnderWordCount);
 
-      setControlEnabled("trendlineControl", isScatter);
+      setControlEnabled("trendlineControl", isScatter || isTimeCount);
 
       updateRatingAfterDaysDateHint();
     }
