@@ -1,6 +1,6 @@
 -J ARTICLES:
 
-- [[[scp-minus 1-j|]]] - Invisible spray paint, solves every problem!
+- [[[scp-minus 1-j|]]]
 - [[[SCP-000-J]]] - "The Official SCP Sales Catalogue"
 - [[[SCP-001-J]]] - The Big Red Button
 - [[[scp-001 and a half-j|]]] - The Big Blue Button
@@ -404,33 +404,33 @@
 - [[[SCP-ZZZZ-J]]] - is a good one to end on
 
 ARC ARTICLES:
-\* [[[eberstrom-s-proposal-arc | Eberstrom's Proposal]]] for SCP-001 - Site-19\
-\* [[[SCP-048-ARC]]] - "Joey"\
-\* [[[SCP-049-ARC]]] - Plague Doctor\
-\* [[[SCP-091-ARC]]] - Wood Nymph\
-\* [[[SCP-132-ARC]]] - Sufferer of the World's Sorrow\
-\* [[[SCP-157-ARC]]] - The "Shot Heard 'Round the World"\
-\* [[[SCP-244-ARC]]] - Egg Walker\
-\* [[[SCP-400-ARC]]] - A Telephone Box\
-\* [[[SCP-494-ARC]]] - Communication Torus\
-\* [[[SCP-515-ARC]]] - Butterfly Camera\
-\* [[[SCP-517-ARC]]] - A Demon Born From War\
-\* [[[SCP-728-ARC]]] - Flying Deer\
-\* [[[SCP-776-ARC]]] - A Slightly Unlucky Die\
-\* [[[SCP-784-ARC]]] - Posthuman Brain\
-\* [[[SCP-922-ARC]]] - Proust's Lunchbox\
-\* [[[SCP-1023-ARC]]] - A Broken Telekill Sword\
-\* [[[SCP-013-ARC]]] - The All and Nothing\
-\* [[[SCP-051-ARC]]] - Flying Jeep\
-\* [[[SCP-112-ARC]]] - Sex-Hating Sphere\
-\* [[[SCP-186-ARC]]] - The Craver of Light\
-\* [[[SCP-232-ARC]]] - Sumerian Goddess of the Dead\
-\* [[[SCP-234-ARC]]] - Blue Goddess\
-\* [[[SCP-257-ARC]]] - Satyr's Skull\
-\* [[[SCP-338-ARC]]] - Fading Disks\
-\* [[[SCP-356-ARC]]] - Cemetery… Portal?\
-\* [[[SCP-406-ARC]]] - Mysterious Life Form\
-\* [[[SCP-578-ARC]]] - The Shattered Girl\
-\* [[[SCP-744-ARC]]] - Rust Monster\
-\* [[[SCP-837-ARC]]] - Weather Bug\
-\* [[[SCP-987-ARC]]] - A Window &#x20;
+* [[[eberstrom-s-proposal-arc | Eberstrom's Proposal]]] for SCP-001 - Site-19
+* [[[SCP-048-ARC]]] - "Joey"
+* [[[SCP-049-ARC]]] - Plague Doctor
+* [[[SCP-091-ARC]]] - Wood Nymph
+* [[[SCP-132-ARC]]] - Sufferer of the World's Sorrow
+* [[[SCP-157-ARC]]] - The "Shot Heard 'Round the World"
+* [[[SCP-244-ARC]]] - Egg Walker
+* [[[SCP-400-ARC]]] - A Telephone Box
+* [[[SCP-494-ARC]]] - Communication Torus
+* [[[SCP-515-ARC]]] - Butterfly Camera
+* [[[SCP-517-ARC]]] - A Demon Born From War
+* [[[SCP-728-ARC]]] - Flying Deer
+* [[[SCP-776-ARC]]] - A Slightly Unlucky Die
+* [[[SCP-784-ARC]]] - Posthuman Brain
+* [[[SCP-922-ARC]]] - Proust's Lunchbox
+* [[[SCP-1023-ARC]]] - A Broken Telekill Sword
+* [[[SCP-013-ARC]]] - The All and Nothing
+* [[[SCP-051-ARC]]] - Flying Jeep
+* [[[SCP-112-ARC]]] - Sex-Hating Sphere
+* [[[SCP-186-ARC]]] - The Craver of Light
+* [[[SCP-232-ARC]]] - Sumerian Goddess of the Dead
+* [[[SCP-234-ARC]]] - Blue Goddess
+* [[[SCP-257-ARC]]] - Satyr's Skull
+* [[[SCP-338-ARC]]] - Fading Disks
+* [[[SCP-356-ARC]]] - Cemetery… Portal?
+* [[[SCP-406-ARC]]] - Mysterious Life Form
+* [[[SCP-578-ARC]]] - The Shattered Girl
+* [[[SCP-744-ARC]]] - Rust Monster
+* [[[SCP-837-ARC]]] - Weather Bug
+* [[[SCP-987-ARC]]] - A Window
