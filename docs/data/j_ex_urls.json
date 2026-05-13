@@ -1,0 +1,2565 @@
+{
+  "generatedAt": "2026-05-13T00:44:50.992Z",
+  "source": "https://apiv1.crom.avn.sh/graphql",
+  "siteUrlPrefix": "http://scp-wiki.wikidot.com",
+  "queryLogic": {
+    "-J": {
+      "tags": [
+        "joke",
+        "scp"
+      ]
+    },
+    "-EX": {
+      "tags": [
+        "explained",
+        "scp"
+      ]
+    }
+  },
+  "requestedTypes": [
+    "-J",
+    "-EX"
+  ],
+  "urlCount": 507,
+  "countsByType": {
+    "-J": 415,
+    "-EX": 92
+  },
+  "urls": [
+    {
+      "url": "http://scp-wiki.wikidot.com/abraka-davids-proposal",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/director-bold-s-proposal-j",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/k1s10r0d-s-proposal",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/queerious-proposal",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-0000-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-001-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-001-ex-j",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-002-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-005-j-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-012-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-067-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1094-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-123-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1329-ru-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1337-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1401-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1512-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1542",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1548-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1551-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1717-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1763-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1841-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1851-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1927-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1933-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1949-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1964-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1974-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1983-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2001-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2011-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2014-ua-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2023-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2140-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2346-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-248-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-252-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2600-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2700-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3000-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3393-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3874",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4023-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4445-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-445-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4734-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-500-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5050-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5054-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5081",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-516-ko-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5218",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5257-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5297-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5735-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5737",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6077",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6192-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-621-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6384",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-666-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6966",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7000-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-711-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7166",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7231",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-726-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7474-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7525-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7719-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7973",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7982",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8000-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-81299-ex-j",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8219",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8285",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8472-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8640",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-888-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8900-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-920-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9229",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9236",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9314",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9320",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-970-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9988",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-999-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-es-100-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-k9-j-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-zh-9288-ex",
+      "type": "-EX",
+      "sourceTag": "explained"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/abraka-davids-proposal",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/cimmerian-kaktus-proposal",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/daveyoufool-proposal",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/ddd-2034",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/deepwell-proposal",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/director-bold-s-proposal-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/djkaktus-s-proposal-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/everyone-s-proposal",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/fishish-s-proposal-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/gpt-4546-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/henzoid-crocket-s-proposal-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/jjj-jjjj-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/misterfrown-s-proposal-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/plauge-proposal",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/rounderhouse-golder-proposal",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-0001-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-0002-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-001-and-a-half-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-001-d-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-001-ex-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-001-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-002-de-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-002-it-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-002-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-003-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-004-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-005-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-005-j-ex",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-006-cu-ex",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-006-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-007-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-008-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-009-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-010-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-011-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-0110-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-012-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-013-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-014-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-015-de-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-015-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-016-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-017-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-018-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-019-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-020-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-021-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-022-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-023-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-024-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-025-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-026-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-027-de-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-027-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-028-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-029-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-030-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-031-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-041-6-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-042-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-043-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-044-de-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-044-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-048-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-049-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-055-de-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-055-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-055-ko-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-063-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-065-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-067-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-069-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-076-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-078-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-086-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-093-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-095-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-096-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1-800-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-100000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-10101-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1013-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1020-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1026-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-103-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1047-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1049-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1054-fr-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-106-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1089-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-111-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1111-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1131-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1132-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1134-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1150-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1162-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-118-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1201-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1212-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1224-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1225-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-123-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1234-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1256-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1294-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-12954-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1319-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1322-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1333-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1343-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1344-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1347-1353-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1394-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1417-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-145-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1459-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-147-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1471-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1472-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-15000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1543-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1550-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1557-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-15625-ko-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1595-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1600-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1622-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1638-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-164-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1671-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1711-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-173-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1797-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1830-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-184-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1840-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1851-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1861-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1883-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1912-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1914-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1921-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1922-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-19316-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1938-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1939-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1948-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1950-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1955-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1960-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1981-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1984-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1986-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1987-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1992-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1994-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1997-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-1d6-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-200-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2002-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2006-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2008-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2019-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2023-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2029-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2041-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-209-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2100-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2103-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2128046979-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2130-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2212-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-222-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-222-th-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-231-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2317-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2383-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2412-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2421-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-248-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2558-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2559-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2600-cu",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2600-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2615-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2618-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-268-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2718-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2719-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-273-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2772-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2800-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2845-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2922-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-294-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-2950-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-300-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3001-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3010-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3034-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-309-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-314-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-32-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-329-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-333-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3333-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-334-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-343-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3434-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3448-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3467-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3472-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3560-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-371-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3790-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3999-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-3v1l-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4001-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4002-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-404-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-405-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4055-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4128-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-419-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-41d3n73-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-420-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4237-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4263-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4297-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4343-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4357-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4389-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-444-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4444-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4445-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4463-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4590-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4619-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-466-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4666-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-47-47-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-477-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-4800-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-496-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-50-ae-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5001-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5031-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5040-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5140-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5150-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5243-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5280-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5308-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-536-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5400-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5417-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-543-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-555-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5678-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-579-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5846-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-5972-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-600-co",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6009-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6060-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6132-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6140-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-615-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-616-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-619-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6269-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6283-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-630-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6327-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6395-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-645-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-649-2568-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-661-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-666-and-a-half-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-666-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6767-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-682-cu",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-682-fr-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-682-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6969-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6989-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-6k-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-700-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7007-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7143-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7159-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-721-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-723-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-724-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-727-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-729-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-732-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-733-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7394-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7423-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7475-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7560-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-777-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7789-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7800-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-789-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-7k-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-80-k-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-800-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8003-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8008-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-808-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-80rk-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-80s-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-810-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8111-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8125-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-81299-ex-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8231-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-885-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8851-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8880-7-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8881-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8888-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-8988-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-900-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9000-01-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9000-arc-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9001-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9119-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9139-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9245-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-930-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-938-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-939-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9595-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9779-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-990-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-99826-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-999-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-9999-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-admonition-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-big-egg-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-blank-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-bonito-jp-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-botnik-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-butt-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-cash4d-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-cc-by-sa-3-0-co",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-cn-2000-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-cn-jpg-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-cool-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-cursing-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-dad-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-damej-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-dave-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-dtbmh-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-ducks-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-es-101-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-even-number-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-how-do-people-pick-j-numbers-anyway-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-in-a-box-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-jaguar-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-k9-j-ex",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-l135-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-meow-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-meta-ex-j-offset",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-minus-1-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-more-gun-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-mwt-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-mystery-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-no-me-importa",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-numberonedoggo-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-o5-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-pingas-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-pl-kot-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-pu1p-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-redacted-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-rocks-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-safe-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-scp-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-secret-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-spc-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-spdr-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-spooky-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-sqrt-1-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-sqyd-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-this-was-a-bad-idea-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-tldr-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-ttku-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-v1l3-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-vs-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-wcpgw-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-why-are-you-reading-a-url-go-be-productive-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-wow-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-wtf-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-xxxx-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/scp-zzzz-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/spc-1057-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/spc-3284-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/taboo-j",
+      "type": "-J",
+      "sourceTag": "joke"
+    },
+    {
+      "url": "http://scp-wiki.wikidot.com/weryllium-proposal",
+      "type": "-J",
+      "sourceTag": "joke"
+    }
+  ]
+}

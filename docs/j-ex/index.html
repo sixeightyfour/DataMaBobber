@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>SCP -J / -ARC Graph Builder</title>
+  <title>SCP -J / -EX Graph Builder</title>
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
   <style>
     body {
@@ -50,15 +50,15 @@
 <body>
   <p><a href="../">Back to mainlist graph builder</a></p>
 
-  <h1>SCP -J / -ARC Graph Builder</h1>
+  <h1>SCP -J / -EX Graph Builder</h1>
 
   <div class="controls">
     <label>
       Dataset
       <select id="datasetKind">
-        <option value="both">-J and -ARC</option>
+        <option value="both">-J and -EX</option>
         <option value="J">-J only</option>
-        <option value="ARC">-ARC only</option>
+        <option value="ARC">-EX only</option>
       </select>
     </label>
 
@@ -144,7 +144,7 @@
     let dataset = null;
 
     async function loadDataset() {
-      const response = await fetch("../data/j_arc_articles.json");
+      const response = await fetch("../data/j_ex_articles.json");
 
       if (!response.ok) {
         throw new Error(`Failed to load dataset: ${response.status}`);
