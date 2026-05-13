@@ -58,7 +58,7 @@
       <select id="datasetKind">
         <option value="both">-J and -EX</option>
         <option value="-J">-J only</option>
-        <option value="-fEX">-EX only</option>
+        <option value="-EX">-EX only</option>
       </select>
     </label>
 
@@ -589,7 +589,7 @@
         y: [...byDate.values()],
         name: "Cumulative articles",
       }], {
-        title: "Cumulative -J / -ARC articles over time",
+        title: "Cumulative -J / -EX articles over time",
         xaxis: { title: "Created date" },
         yaxis: { title: "Article count" },
       }, { responsive: true });
