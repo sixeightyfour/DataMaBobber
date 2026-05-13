@@ -57,8 +57,8 @@
       Dataset
       <select id="datasetKind">
         <option value="both">-J and -EX</option>
-        <option value="J">-J only</option>
-        <option value="ARC">-EX only</option>
+        <option value="-J">-J only</option>
+        <option value="-fEX">-EX only</option>
       </select>
     </label>
 
@@ -69,9 +69,20 @@
         <option value="histogram">Histogram</option>
         <option value="time-count">Articles over time</option>
         <option value="running-average">Running average word count over time</option>
+        <option value="vote-activity">Vote activity</option>
       </select>
     </label>
 
+    <label>
+      Vote grouping
+      <select id="periodSize">
+        <option value="day">Daily</option>
+        <option value="month">Monthly</option>
+        <option value="half-year" selected>Every 6 months</option>
+        <option value="year">Yearly</option>
+      </select>
+    </label>
+    
     <label>
       X axis
       <select id="xField">
@@ -154,7 +165,7 @@
 
       renderGraph();
     }
-
+    
     function parseDateOnly(value) {
       if (!value) return null;
       return new Date(`${value}T00:00:00Z`);
@@ -246,6 +257,160 @@
       });
     }
 
+    function periodKey(date, periodSize) {
+      const year = date.getUTCFullYear();
+      const month = date.getUTCMonth();
+
+      if (periodSize === "day") {
+        return date.toISOString().slice(0, 10);
+      }
+
+      if (periodSize === "year") {
+        return `${year}-01-01`;
+      }
+
+      if (periodSize === "half-year") {
+        return month < 6 ? `${year}-01-01` : `${year}-07-01`;
+      }
+
+      return `${year}-${String(month + 1).padStart(2, "0")}-01`;
+    }
+
+
+    function labelForPeriod(periodSize) {
+      const labels = {
+        day: "day",
+        month: "month",
+        "half-year": "6-month period",
+        year: "year",
+      };
+
+      return labels[periodSize] || periodSize;
+    }
+
+
+    function voteDateFromArticleVote(article, vote) {
+      const created = articleDate(article);
+
+      return new Date(
+        created.getTime() + vote.days_after_creation * 86400000
+      );
+    }
+
+
+    function buildVoteSeries(articles) {
+      const periodSize = document.getElementById("periodSize").value;
+      const grouped = new Map();
+
+      for (const article of articles) {
+        for (const vote of article.votes || []) {
+          if (vote.direction !== 1 && vote.direction !== -1) {
+            continue;
+          }
+
+          const voteDate = voteDateFromArticleVote(article, vote);
+          const key = periodKey(voteDate, periodSize);
+
+          if (!grouped.has(key)) {
+            grouped.set(key, {
+              upvotes: 0,
+              downvotes: 0,
+            });
+          }
+
+          const row = grouped.get(key);
+
+          if (vote.direction === 1) {
+            row.upvotes += 1;
+          } else if (vote.direction === -1) {
+            row.downvotes += 1;
+          }
+        }
+      }
+
+      const dates = [...grouped.keys()].sort();
+
+      const upvotes = [];
+      const downvotes = [];
+      const composite = [];
+
+      for (const date of dates) {
+        const row = grouped.get(date);
+
+        upvotes.push(row.upvotes);
+        downvotes.push(row.downvotes);
+        composite.push(row.upvotes - row.downvotes);
+      }
+
+      return {
+        dates,
+        upvotes,
+        downvotes,
+        composite,
+        periodSize,
+      };
+    }
+
+
+    function renderVoteActivity(articles) {
+      const series = buildVoteSeries(articles);
+
+      if (series.dates.length === 0) {
+        Plotly.newPlot("chart", [], {
+          title: "Vote Activity",
+          xaxis: { title: "Vote period" },
+          yaxis: { title: "Votes" },
+        }, { responsive: true });
+
+        document.getElementById("stats").textContent =
+          `Articles included: ${articles.length}\nNo vote records found.`;
+
+        return;
+      }
+
+      const traces = [
+        {
+          type: "scatter",
+          mode: "lines+markers",
+          x: series.dates,
+          y: series.upvotes,
+          name: "Upvotes",
+        },
+        {
+          type: "scatter",
+          mode: "lines+markers",
+          x: series.dates,
+          y: series.downvotes,
+          name: "Downvotes",
+        },
+        {
+          type: "scatter",
+          mode: "lines+markers",
+          x: series.dates,
+          y: series.composite,
+          name: "Composite score",
+        },
+      ];
+
+      Plotly.newPlot("chart", traces, {
+        title: `Vote Activity by ${labelForPeriod(series.periodSize)}`,
+        xaxis: { title: "Vote period" },
+        yaxis: { title: "Votes / composite score" },
+      }, { responsive: true });
+
+      const totalUpvotes = series.upvotes.reduce((a, b) => a + b, 0);
+      const totalDownvotes = series.downvotes.reduce((a, b) => a + b, 0);
+      const totalComposite = totalUpvotes - totalDownvotes;
+
+      document.getElementById("stats").textContent =
+        `Articles included: ${articles.length}` +
+        `\nVote periods shown: ${series.dates.length}` +
+        `\nGrouping: ${labelForPeriod(series.periodSize)}` +
+        `\nTotal upvotes: ${totalUpvotes}` +
+        `\nTotal downvotes: ${totalDownvotes}` +
+        `\nTotal composite score: ${totalComposite}`;
+    }
+    
     function pearsonR(x, y) {
       const n = x.length;
       if (n < 2) return null;
@@ -273,6 +438,7 @@
       return numerator / denominator;
     }
 
+    
     function linearRegression(x, y) {
       const n = x.length;
       if (n < 2) return null;
@@ -478,6 +644,8 @@
         renderTimeCount(articles);
       } else if (graphType === "running-average") {
         renderRunningAverage(articles);
+      } else if (graphType === "vote-activity") {
+        renderVoteActivity(articles);
       }
     }
 
@@ -493,6 +661,7 @@
       "maxCurrentRating",
       "maxWordCount",
       "binWidth",
+      "periodSize",
       "trendline",
     ];
 
