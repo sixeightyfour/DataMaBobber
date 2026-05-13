@@ -25,7 +25,7 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Build dataset
-        run: python scripts/build_dataset.py
+        run: python -u scripts/build_dataset.py
 
       - name: Build lightweight author/date dataset
         run: python scripts/build_article_author_dates.py
