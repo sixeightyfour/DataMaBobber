@@ -12,8 +12,8 @@ CROM_ENDPOINT = "https://apiv1.crom.avn.sh/graphql"
 START = 2
 END = 9999
 
-BATCH_SIZE = 15
-REQUEST_DELAY_SECONDS = 0.25
+BATCH_SIZE = 50
+REQUEST_DELAY_SECONDS = 1
 
 OUTPUT_PATH = Path("docs/data/scp_articles.json")
 
