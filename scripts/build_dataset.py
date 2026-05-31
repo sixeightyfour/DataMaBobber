@@ -15,7 +15,7 @@ END = 9999
 BATCH_SIZE = 15
 REQUEST_DELAY_SECONDS = .5
 
-OUTPUT_PATH = Path("docs/data/scp_articles.json")
+OUTPUT_PATH = Path("docs/data/scp_articles_detailed.json")
 
 BLACKLISTED_CHILD_URLS = {
     "http://scp-wiki.wikidot.com/fragment:scp-8980-1",
