@@ -132,7 +132,6 @@ def build_batch_query(numbers: list[int]) -> str:
                 rating
                 createdAt
                 tags
-                source
                 coarseVoteRecords {{
                   timestamp
                   direction
