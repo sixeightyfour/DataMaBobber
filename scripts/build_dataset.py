@@ -138,9 +138,6 @@ def build_batch_query(numbers: list[int]) -> str:
                 }}
                 children {{
                   url
-                  wikidotInfo {{
-                    source
-                  }}
                 }}
               }}
             }}
