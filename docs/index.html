@@ -387,79 +387,120 @@
       return { slope, intercept };
     }
 
-    function renderScatter(articles) {
-      const xField = document.getElementById("xField").value;
-      const yField = document.getElementById("yField").value;
-      const includeTrendline = document.getElementById("trendline").value === "yes";
-
-      const points = articles
-        .map(article => ({
-          article,
-          x: getFieldValue(article, xField),
-          y: getFieldValue(article, yField),
-        }))
-        .filter(point =>
-          point.x !== null &&
-          point.x !== undefined &&
-          point.y !== null &&
-          point.y !== undefined
-        );
-
-      const x = points.map(p => p.x);
-      const y = points.map(p => p.y);
-
-      const traces = [{
-        type: "scatter",
-        mode: "markers",
-        x,
-        y,
-        text: points.map(p => `SCP-${String(p.article.scp_number).padStart(3, "0")}<br>${p.article.url}`),
-        marker: { size: 6, opacity: 0.55 },
-        name: "Articles"
-      }];
-
-      let statsText = `Articles plotted: ${points.length}`;
-
-      const numericX = x.every(v => typeof v === "number" && Number.isFinite(v));
-      const numericY = y.every(v => typeof v === "number" && Number.isFinite(v));
-
-      if (includeTrendline && numericX && numericY && points.length >= 2) {
-        const r = pearsonR(x, y);
-        const regression = linearRegression(x, y);
-
-        if (r !== null && regression !== null) {
-          const minX = Math.min(...x);
-          const maxX = Math.max(...x);
-
-          traces.push({
-            type: "scatter",
-            mode: "lines",
-            x: [minX, maxX],
-            y: [
-              regression.slope * minX + regression.intercept,
-              regression.slope * maxX + regression.intercept,
-            ],
-            name: `Trendline: y = ${regression.slope.toFixed(5)}x + ${regression.intercept.toFixed(2)}`
-          });
-
-          statsText += `\nPearson r: ${r.toFixed(6)}`;
-          statsText += `\nTrendline slope: ${regression.slope.toFixed(6)}`;
-          statsText += `\nTrendline intercept: ${regression.intercept.toFixed(6)}`;
-        }
+  function renderScatter(articles) {
+    const xField = document.getElementById("xField").value;
+    const yField = document.getElementById("yField").value;
+    const includeTrendline =
+      document.getElementById("trendline").value === "yes";
+  
+    const points = articles
+      .map(article => ({
+        article,
+        x: getFieldValue(article, xField),
+        y: getFieldValue(article, yField),
+      }))
+      .filter(point =>
+        point.x !== null &&
+        point.x !== undefined &&
+        point.y !== null &&
+        point.y !== undefined
+      );
+  
+    const x = points.map(point => point.x);
+    const y = points.map(point => point.y);
+  
+    const regressionX = x.map(value =>
+      value instanceof Date
+        ? value.getTime() / 86400000
+        : value
+    );
+  
+    const traces = [{
+      type: "scatter",
+      mode: "markers",
+      x,
+      y,
+      text: points.map(point =>
+        `SCP-${String(point.article.scp_number).padStart(3, "0")}<br>${point.article.url}`
+      ),
+      marker: {
+        size: 6,
+        opacity: 0.55
+      },
+      name: "Articles"
+    }];
+  
+    let statsText = `Articles plotted: ${points.length}`;
+  
+    const numericX = regressionX.every(
+      value => typeof value === "number" && Number.isFinite(value)
+    );
+  
+    const numericY = y.every(
+      value => typeof value === "number" && Number.isFinite(value)
+    );
+  
+    if (
+      includeTrendline &&
+      numericX &&
+      numericY &&
+      points.length >= 2
+    ) {
+      const r = pearsonR(regressionX, y);
+      const regression = linearRegression(regressionX, y);
+  
+      if (r !== null && regression !== null) {
+        const minX = Math.min(...regressionX);
+        const maxX = Math.max(...regressionX);
+  
+        const trendlineX = xField === "createdAt"
+          ? [
+              new Date(minX * 86400000),
+              new Date(maxX * 86400000)
+            ]
+          : [minX, maxX];
+  
+        traces.push({
+          type: "scatter",
+          mode: "lines",
+          x: trendlineX,
+          y: [
+            regression.slope * minX + regression.intercept,
+            regression.slope * maxX + regression.intercept,
+          ],
+          name: xField === "createdAt"
+            ? `Trendline: ${regression.slope.toFixed(5)} per day`
+            : `Trendline: y = ${regression.slope.toFixed(5)}x + ${regression.intercept.toFixed(2)}`
+        });
+  
+        statsText += `\nPearson r: ${r.toFixed(6)}`;
+        statsText +=
+          `\nTrendline slope: ${regression.slope.toFixed(6)}` +
+          `${xField === "createdAt" ? " per day" : ""}`;
+        statsText +=
+          `\nTrendline intercept: ${regression.intercept.toFixed(6)}`;
       }
-
-      Plotly.newPlot("chart", traces, {
-        title: `${labelForField(yField)} vs ${labelForField(xField)}`,
-        xaxis: { title: labelForField(xField) },
-        yaxis: { title: labelForField(yField) },
-      }, { responsive: true });
-
-      if (usesRatingAfterDaysAnywhere()) {
-        statsText += `\nRating-after-N-days date floor applied: created after ${RATING_AFTER_DAYS_MIN_DATE_STRING}`;
-      }
-
-      document.getElementById("stats").textContent = statsText;
     }
+  
+    Plotly.newPlot("chart", traces, {
+      title: `${labelForField(yField)} vs ${labelForField(xField)}`,
+      xaxis: {
+        title: labelForField(xField)
+      },
+      yaxis: {
+        title: labelForField(yField)
+      },
+    }, {
+      responsive: true
+    });
+  
+    if (usesRatingAfterDaysAnywhere()) {
+      statsText +=
+        `\nRating-after-N-days date floor applied: created after ${RATING_AFTER_DAYS_MIN_DATE_STRING}`;
+    }
+  
+    document.getElementById("stats").textContent = statsText;
+  }
 
     function renderHistogram(articles) {
       const xField = document.getElementById("xField").value;
