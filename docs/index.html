@@ -57,7 +57,7 @@
   </style>
 </head>
 <body>
-  <h1>DataMaBobber (Patent Pending)</h1>
+  <h1>MaBobber (Patent Pending)</h1>
 
   <p>
     <a href="users/">View articles-per-user histogram for the last 30 days</a>
@@ -174,16 +174,16 @@
   </div>
 
   <div id="chart"></div>
-  <div id="stats">Loading dataset...</div>
+  <div id="stats">Loading set...</div>
 
   <script>
     let dataset = null;
 
-    const RATING_AFTER_DAYS_MIN_DATE = new Date("2022-05-15T00:00:00Z");
-    const RATING_AFTER_DAYS_MIN_DATE_STRING = "2022-05-15";
+    const RATING_AFTER_DAYS_MIN_DATE = new Date("2015-05-15T00:00:00Z");
+    const RATING_AFTER_DAYS_MIN_DATE_STRING = "2015-05-15";
 
     async function loadDataset() {
-      const response = await fetch("data/scp_articles.json");
+      const response = await fetch("data/scp_articles_detailed.json");
       if (!response.ok) {
         throw new Error(`Failed to load dataset: ${response.status}`);
       }
